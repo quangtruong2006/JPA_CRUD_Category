@@ -26,9 +26,10 @@ public class MySiteMeshFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String path = req.getRequestURI();
 
-        // Bỏ qua các file tĩnh hoặc trang login/register
+        // Bỏ qua các file tĩnh, trang login/register, hoặc khi đã forward trực tiếp tới layout admin.jsp
         if (path.contains("/login") || path.contains("/register") || path.contains("/logout") || 
-            path.contains("/image") || path.endsWith(".css") || path.endsWith(".js")) {
+            path.contains("/image") || path.endsWith(".css") || path.endsWith(".js") ||
+            path.contains("/decorators/")) {
             chain.doFilter(request, response);
             return;
         }

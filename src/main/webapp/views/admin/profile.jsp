@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<div class="card shadow-sm mt-4">
-    <div class="card-header bg-info text-white">
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-info text-white py-3">
         <h4 class="mb-0 fw-bold">Cập nhật thông tin cá nhân</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body p-4">
         <form action="<c:url value='/admin/profile/update'/>" method="post" enctype="multipart/form-data">
             
             <!-- ID ẩn để update -->
@@ -37,7 +37,6 @@
             
             <div class="mt-4">
                 <button type="submit" class="btn btn-info text-white fw-bold px-4">Update Profile</button>
-                <!-- Nút quay lại trang chủ / danh sách -->
                 <a href="<c:url value='/admin/categories'/>" class="btn btn-secondary px-4 ms-2">Quay lại</a>
             </div>
             
