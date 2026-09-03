@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+    <!-- Bỏ qua các trang không cần trang trí -->
+    <decorator name="none" path="/login">
+        <pattern>/login*</pattern>
+        <pattern>/register*</pattern>
+        <pattern>/logout*</pattern>
+        <pattern>/image*</pattern>
+    </decorator>
+
+    <!-- Trang quản trị Admin -->
+    <decorator name="admin" path="admin.jsp">
+        <pattern>/admin/*</pattern>
+    </decorator>
+
+    <!-- Trang Web chung -->
+    <decorator name="web" path="web.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>
