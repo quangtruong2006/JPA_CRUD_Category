@@ -1,8 +1,7 @@
-package vn.iotstar.dao; // Đã đổi package
+package vn.iotstar.dao; 
 
 import java.util.List;
-import vn.iotstar.entity.Category; // Đã đổi sang package vn.iotstar của ông
-
+import vn.iotstar.entity.Category; 
 public interface ICategoryDao {
     void insert(Category cate);
     void update(Category cate);

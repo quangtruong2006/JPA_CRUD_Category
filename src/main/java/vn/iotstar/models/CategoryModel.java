@@ -1,6 +1,6 @@
-package vn.iotstar.models; // Đã đổi package
+package vn.iotstar.models;
 
-import vn.iotstar.entity.Category; // Đã đổi sang package vn.iotstar của ông
+import vn.iotstar.entity.Category; 
 
 public class CategoryModel extends Category {
     private static final long serialVersionUID = 1L;

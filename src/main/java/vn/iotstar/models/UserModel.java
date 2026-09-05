@@ -1,7 +1,7 @@
-package vn.iotstar.models; // Đã đổi package
+package vn.iotstar.models; 
 
 import java.sql.Date;
-import vn.iotstar.entity.User; // Đã đổi sang package vn.iotstar của ông
+import vn.iotstar.entity.User; 
 
 public class UserModel extends User {
     private static final long serialVersionUID = 1L;

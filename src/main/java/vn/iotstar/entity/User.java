@@ -1,4 +1,4 @@
-package vn.iotstar.entity; // Đã đổi package
+package vn.iotstar.entity; 
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -47,6 +47,13 @@ public class User implements Serializable {
     @Column(name = "createdDate")
     @Temporal(TemporalType.DATE)
     private Date createdDate;
+
+    // --- BỔ SUNG 2 TRƯỜNG CHO TÍNH NĂNG OTP ---
+    @Column(name = "code", length = 10)
+    private String code;
+
+    @Column(name = "status")
+    private Integer status = 0; // Mặc định 0 là chưa kích hoạt
 
     public User() {
         super();
@@ -119,7 +126,6 @@ public class User implements Serializable {
         this.fullname = fullname;
     }
 
-    // JSP EL camelCase support (${account.fullName})
     public String getFullName() {
         return fullname;
     }
@@ -168,10 +174,27 @@ public class User implements Serializable {
         this.createdDate = createdDate;
     }
 
+    // --- GETTER & SETTER CHO CODE VÀ STATUS ---
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getStatus() {
+        return status != null ? status : 0;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", username=" + username + ", fullname=" + fullname
                 + ", password=" + password + ", avatar=" + avatar + ", roleid=" + roleid + ", phone=" + phone
-                + ", createdDate=" + createdDate + "]";
+                + ", createdDate=" + createdDate + ", code=" + code + ", status=" + status + "]";
     }
 }

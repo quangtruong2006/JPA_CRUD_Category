@@ -1,4 +1,4 @@
-package vn.iotstar.controllers; // Đã đổi package
+package vn.iotstar.controllers; 
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// Đã đổi sang package vn.iotstar của ông
+
 import vn.iotstar.entity.User;
 import vn.iotstar.services.IUserService;
 import vn.iotstar.services.impl.UserServiceImpl;

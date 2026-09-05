@@ -58,6 +58,19 @@
             color: #0055dd;
         }
 
+        .nav-link-custom {
+            color: #64748b;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-link-custom:hover {
+            color: #0077ff;
+        }
+
         .btn-topbar-logout {
             background: var(--danger-gradient);
             color: #ffffff !important;
@@ -119,6 +132,42 @@
             border-color: #93c5fd;
             transform: translateX(4px);
         }
+
+        /* --- CSS CHO SẢN PHẨM --- */
+        .product-card {
+            background: #ffffff;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 119, 255, 0.15);
+            border-color: #93c5fd;
+        }
+        .product-img-wrapper {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+        }
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover .product-img-wrapper img {
+            transform: scale(1.1);
+        }
+        .product-price {
+            color: #ef4444;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
     </style>
 </head>
 <body>
@@ -126,9 +175,16 @@
     <!-- TOPBAR -->
     <div class="topbar-user">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="${pageContext.request.contextPath}/home" class="brand-logo">
-                <i class="bi bi-bag-heart-fill fs-3"></i> Shopping Store
-            </a>
+            
+            <!-- LOGO & MENU ĐIỀU HƯỚNG SANG /product -->
+            <div class="d-flex align-items-center gap-4">
+                <a href="${pageContext.request.contextPath}/home" class="brand-logo">
+                    <i class="bi bi-bag-heart-fill fs-3"></i> Shopping Store
+                </a>
+                <a href="${pageContext.request.contextPath}/product" class="nav-link-custom">
+                    <i class="bi bi-grid-3x3-gap-fill text-primary"></i> Xem Tất Cả Sản Phẩm
+                </a>
+            </div>
 
             <c:choose>
                 <c:when test="${empty sessionScope.account}">
@@ -151,7 +207,9 @@
 
     <!-- MAIN BODY -->
     <div class="container py-5">
-        <div class="row justify-content-center">
+        
+        <!-- PHẦN 1: PROFILE CARD -->
+        <div class="row justify-content-center mb-5">
             <div class="col-lg-6 col-md-8">
                 <div class="profile-card text-center">
                     <div class="mb-3">
@@ -208,6 +266,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- PHẦN 2: 10 SẢN PHẨM MỚI NHẤT -->
+        <div class="row mb-4">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-fire text-danger fs-3"></i>
+                    <h3 class="fw-bold mb-0" style="color: #0f172a;">10 SẢN PHẨM MỚI NHẤT</h3>
+                </div>
+                <a href="${pageContext.request.contextPath}/product" class="btn btn-sm btn-outline-primary fw-bold">Xem tất cả &rarr;</a>
+            </div>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+            <c:forEach items="${list10}" var="p">
+                <div class="col">
+                    <div class="product-card h-100 d-flex flex-column">
+                        <div class="product-img-wrapper">
+                            <img src="${pageContext.request.contextPath}/uploads/${p.image}" alt="${p.productName}">
+                        </div>
+                        <div class="p-3 d-flex flex-column flex-grow-1">
+                            <h6 class="fw-bold text-dark mb-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                ${p.productName}
+                            </h6>
+                            <p class="product-price mt-auto mb-3">${p.price} VNĐ</p>
+                            
+                            <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" 
+                               class="btn btn-outline-primary btn-sm w-100 fw-bold">
+                               <i class="bi bi-eye me-1"></i> Xem Chi Tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+
     </div>
 
     <!-- Bootstrap 5 JS -->

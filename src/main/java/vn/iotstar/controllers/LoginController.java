@@ -1,4 +1,4 @@
-package vn.iotstar.controllers; // Đã đổi package
+package vn.iotstar.controllers; 
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-// Đã đổi sang package vn.iotstar của ông
 import vn.iotstar.entity.User;
 import vn.iotstar.services.IUserService;
 import vn.iotstar.services.impl.UserServiceImpl;
@@ -66,16 +65,26 @@ public class LoginController extends HttpServlet {
 
         User user = service.login(username.trim(), password);
         if (user != null) {
+            
+            // --- CHỐT CHẶN: KIỂM TRA KÍCH HOẠT TÀI KHOẢN (STATUS == 1) ---
+            if (user.getStatus() != 1) {
+                req.setAttribute("alert", "Tài khoản chưa được kích hoạt! Vui lòng kiểm tra email để nhập mã OTP.");
+                req.setAttribute("username", username);
+                req.setAttribute("isRemember", isRememberMe);
+                req.getSession().setAttribute("email", user.getEmail());
+                req.getRequestDispatcher(Constant.Path.LOGIN).forward(req, resp);
+                return;
+            }
+            // -------------------------------------------------------------
+
             // Lưu thông tin người dùng vào Session
             HttpSession session = req.getSession(true);
             session.setAttribute("account", user);
 
             // Xử lý Cookie Remember Me
             if (isRememberMe) {
-                // Lưu cookie username trong 24 giờ (86400 giây)
                 CookieUtils.add(resp, Constant.COOKIE_REMEMBER, username.trim(), 24 * 60 * 60);
             } else {
-                // Nếu người dùng chủ động bỏ chọn ghi nhớ, xóa cookie cũ
                 CookieUtils.delete(resp, Constant.COOKIE_REMEMBER);
             }
 

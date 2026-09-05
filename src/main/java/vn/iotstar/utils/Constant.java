@@ -1,4 +1,4 @@
-package vn.iotstar.utils; // Đã đổi package
+package vn.iotstar.utils; 
 
 public class Constant {
     public static final String SESSION_USERNAME = "username";

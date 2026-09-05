@@ -1,10 +1,10 @@
-package vn.iotstar.dao.impl; // Đã đổi package
+package vn.iotstar.dao.impl; 
 
 import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import vn.iotstar.config.JpaConfig; // Đã chuyển sang package vn.iotstar
+import vn.iotstar.config.JpaConfig; 
 import vn.iotstar.dao.ICategoryDao;
 import vn.iotstar.entity.Category;
 

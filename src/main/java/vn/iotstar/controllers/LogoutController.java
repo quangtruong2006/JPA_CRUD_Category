@@ -1,4 +1,4 @@
-package vn.iotstar.controllers; // Đã đổi package
+package vn.iotstar.controllers; 
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;

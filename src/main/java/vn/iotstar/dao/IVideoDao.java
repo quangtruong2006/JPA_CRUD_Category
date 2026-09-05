@@ -1,7 +1,7 @@
-package vn.iotstar.dao; // Đã đổi package
+package vn.iotstar.dao; 
 
 import java.util.List;
-import vn.iotstar.entity.Video; // Đã đổi sang package vn.iotstar của ông
+import vn.iotstar.entity.Video; 
 
 public interface IVideoDao {
     void insert(Video video);

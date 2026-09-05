@@ -1,10 +1,9 @@
-package vn.iotstar.config; // Đã đổi package
+package vn.iotstar.config; 
 
 import java.sql.Date;
 import java.util.List;
 import jakarta.persistence.EntityManager;
 
-// Đã đổi toàn bộ import sang nhà vn.iotstar
 import vn.iotstar.dao.CategoryDao;
 import vn.iotstar.dao.ICategoryDao;
 import vn.iotstar.dao.IUserDao;
@@ -42,10 +41,9 @@ public class Test {
 
         IUserDao userDao = new UserDao();
         ICategoryDao categoryDao = new CategoryDao();
-        IVideoDao videoDao = new VideoDao(); // Nếu ông chưa có VideoDao thì dòng này có thể báo lỗi đỏ, cứ comment // nó lại trước nhé
+        IVideoDao videoDao = new VideoDao(); 
 
         try {
-            // Chèn tài khoản Admin (Đã xóa tên bạn ông, thay bằng thông tin của ông)
             if (!userDao.checkExistUsername("admin")) {
                 User admin = new User("truong.nguyen@gmail.com", "admin", "Nguyễn Quang Trường", "123", "avt.png", 1, "0838123456", new Date(System.currentTimeMillis()));
                 userDao.insert(admin);

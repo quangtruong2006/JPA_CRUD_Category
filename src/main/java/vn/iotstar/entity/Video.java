@@ -1,4 +1,4 @@
-package vn.iotstar.entity; // Đã đổi package
+package vn.iotstar.entity; 
 
 import java.io.Serializable;
 import jakarta.persistence.Column;

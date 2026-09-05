@@ -15,10 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.iotstar.utils.Constant;
 
 @WebServlet(urlPatterns = "/image")
-public class ImageServlet extends HttpServlet { // Giữ nguyên tên ImageServlet
+public class ImageServlet extends HttpServlet { 
     private static final long serialVersionUID = 1L;
 
-    // Đã dọn dẹp sạch đường dẫn cá nhân, chỉ giữ lại các thư mục chung an toàn
     private static final String[] SEARCH_DIRS = {
         Constant.DIR,
         "C:\\upload",

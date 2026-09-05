@@ -1,4 +1,4 @@
-package vn.iotstar.entity; // Đã đổi package
+package vn.iotstar.entity; 
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,8 +34,15 @@ public class Category implements Serializable {
     @Column(name = "status", nullable = true)
     private Integer status = 1;
 
+    // QUAN HỆ 1-N VỚI BẢNG VIDEO (Đã có sẵn)
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Video> videos = new ArrayList<>();
+
+    // ==========================================
+    // MỚI THÊM: QUAN HỆ 1-N VỚI BẢNG PRODUCT
+    // ==========================================
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Product> products = new ArrayList<>();
 
     public Category() {
         super();
@@ -95,6 +102,7 @@ public class Category implements Serializable {
         this.status = status;
     }
 
+    // --- GETTER / SETTER CHO VIDEO ---
     public List<Video> getVideos() {
         return videos;
     }
@@ -113,6 +121,29 @@ public class Category implements Serializable {
         getVideos().remove(video);
         video.setCategory(null);
         return video;
+    }
+
+    // ==========================================
+    // MỚI THÊM: GETTER / SETTER CHO PRODUCT
+    // ==========================================
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Product addProduct(Product product) {
+        getProducts().add(product);
+        product.setCategory(this);
+        return product;
+    }
+
+    public Product removeProduct(Product product) {
+        getProducts().remove(product);
+        product.setCategory(null);
+        return product;
     }
 
     // ==========================================

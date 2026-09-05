@@ -1,6 +1,6 @@
-package vn.iotstar.dao; // Đã đổi package
+package vn.iotstar.dao; 
 
-import vn.iotstar.dao.impl.UserDaoImpl; // Đã đổi sang package vn.iotstar của ông
+import vn.iotstar.dao.impl.UserDaoImpl; 
 
 public class UserDao extends UserDaoImpl {
 }

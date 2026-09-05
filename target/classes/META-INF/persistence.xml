@@ -12,7 +12,7 @@
         <class>vn.iotstar.entity.User</class>
         <class>vn.iotstar.entity.Category</class>
         <class>vn.iotstar.entity.Video</class>
-
+        <class>vn.iotstar.entity.Product</class>
         <properties>
             <!-- Trỏ thẳng vào localhost:1433 để bypass lỗi phân giải Named Instance -->
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

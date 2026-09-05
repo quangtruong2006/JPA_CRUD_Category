@@ -1,7 +1,6 @@
-package vn.iotstar.dao; // Đã đổi package
+package vn.iotstar.dao; 
 
 import java.util.List;
-// Đã đổi sang package vn.iotstar của ông
 import vn.iotstar.entity.User;
 import vn.iotstar.models.UserModel;
 

@@ -251,6 +251,14 @@
                         <i class="bi bi-folder2-open"></i> Quản lý Danh mục
                     </a>
                 </li>
+                
+                <!-- THÊM MENU QUẢN LÝ SẢN PHẨM Ở ĐÂY -->
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/product/list">
+                        <i class="bi bi-box-seam"></i> Quản lý Sản phẩm
+                    </a>
+                </li>
+
                 <li>
                     <a href="${pageContext.request.contextPath}/profile">
                         <i class="bi bi-person-badge-fill"></i> Hồ sơ cá nhân (Profile)

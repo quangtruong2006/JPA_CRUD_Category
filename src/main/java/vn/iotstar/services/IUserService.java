@@ -1,7 +1,7 @@
-package vn.iotstar.services; // Đã đổi package
+package vn.iotstar.services;
 
 import java.util.List;
-import vn.iotstar.entity.User; // Đã đổi sang package vn.iotstar của ông
+import vn.iotstar.entity.User; 
 import vn.iotstar.models.UserModel;
 
 public interface IUserService {

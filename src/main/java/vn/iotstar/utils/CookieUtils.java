@@ -1,10 +1,10 @@
-package vn.iotstar.utils; // Đã đổi package
+package vn.iotstar.utils; 
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-// Đã chuyển sang package vn.iotstar của ông
+
 import vn.iotstar.entity.User;
 import vn.iotstar.services.IUserService;
 

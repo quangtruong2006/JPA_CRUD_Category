@@ -10,7 +10,6 @@ public class JpaConfig {
     public static synchronized EntityManagerFactory getEntityManagerFactory() {
         if (factory == null || !factory.isOpen()) {
             try {
-                // Đã sửa tên persistence-unit cho khớp với persistence.xml của ông
                 factory = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
             } catch (Exception e) {
                 System.err.println("❌ LỖI KHỞI TẠO ENTITY MANAGER FACTORY: " + e.getMessage());
