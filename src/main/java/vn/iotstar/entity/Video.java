@@ -1,38 +1,58 @@
-package vn.iotstar.entity;
+package vn.iotstar.entity; // Đã đổi package
 
 import java.io.Serializable;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Videos")
-@NamedQuery(name="Video.findAll", query="SELECT v FROM Video v")
+@Table(name = "videos")
+@NamedQuery(name = "Video.findAll", query = "SELECT v FROM Video v")
 public class Video implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="VideoId")
+    @Column(name = "videoId", length = 50)
     private String videoId;
 
-    @Column(name="Active")
-    private int active;
-
-    @Column(name="Description", columnDefinition = "nvarchar(500) null")
-    private String description;
-
-    @Column(name="Poster", columnDefinition = "nvarchar(500) null")
-    private String poster;
-
-    @Column(name="Title", columnDefinition = "nvarchar(500) null")
+    @Column(name = "title", columnDefinition = "NVARCHAR(255)", nullable = false)
     private String title;
 
-    @Column(name="Views")
+    @Column(name = "poster", columnDefinition = "NVARCHAR(500)")
+    private String poster;
+
+    @Column(name = "views")
     private int views;
 
-    @ManyToOne
-    @JoinColumn(name="CategoryId")
+    @Column(name = "description", columnDefinition = "NVARCHAR(MAX)")
+    private String description;
+
+    @Column(name = "active")
+    private boolean active;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoryId", referencedColumnName = "cate_id")
     private Category category;
 
     public Video() {
+        super();
+    }
+
+    public Video(String videoId, String title, String poster, int views, String description, boolean active,
+            Category category) {
+        super();
+        this.videoId = videoId;
+        this.title = title;
+        this.poster = poster;
+        this.views = views;
+        this.description = description;
+        this.active = active;
+        this.category = category;
     }
 
     public String getVideoId() {
@@ -43,20 +63,12 @@ public class Video implements Serializable {
         this.videoId = videoId;
     }
 
-    public int getActive() {
-        return active;
+    public String getTitle() {
+        return title;
     }
 
-    public void setActive(int active) {
-        this.active = active;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPoster() {
@@ -67,14 +79,6 @@ public class Video implements Serializable {
         this.poster = poster;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getViews() {
         return views;
     }
@@ -83,11 +87,33 @@ public class Video implements Serializable {
         this.views = views;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Video [videoId=" + videoId + ", title=" + title + ", poster=" + poster + ", views=" + views
+                + ", description=" + description + ", active=" + active + "]";
     }
 }

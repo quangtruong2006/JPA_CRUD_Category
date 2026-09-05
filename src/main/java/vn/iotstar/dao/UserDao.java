@@ -1,31 +1,6 @@
-package vn.iotstar.dao;
+package vn.iotstar.dao; // Đã đổi package
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import vn.iotstar.config.JpaConfig;
-import vn.iotstar.entity.User;
+import vn.iotstar.dao.impl.UserDaoImpl; // Đã đổi sang package vn.iotstar của ông
 
-public class UserDao implements IUserDao {
-    @Override
-    public User findById(int userid) {
-        EntityManager enma = JpaConfig.getEntityManager();
-        return enma.find(User.class, userid);
-    }
-
-    @Override
-    public void update(User user) {
-        EntityManager enma = JpaConfig.getEntityManager();
-        EntityTransaction trans = enma.getTransaction();
-        try {
-            trans.begin();
-            enma.merge(user);
-            trans.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            trans.rollback();
-            throw e;
-        } finally {
-            enma.close();
-        }
-    }
+public class UserDao extends UserDaoImpl {
 }

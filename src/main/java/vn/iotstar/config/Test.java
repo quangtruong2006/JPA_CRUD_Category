@@ -1,37 +1,111 @@
-package vn.iotstar.config;
+package vn.iotstar.config; // Đã đổi package
 
+import java.sql.Date;
+import java.util.List;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
+
+// Đã đổi toàn bộ import sang nhà vn.iotstar
+import vn.iotstar.dao.CategoryDao;
+import vn.iotstar.dao.ICategoryDao;
+import vn.iotstar.dao.IUserDao;
+import vn.iotstar.dao.IVideoDao;
+import vn.iotstar.dao.UserDao;
+import vn.iotstar.dao.VideoDao;
 import vn.iotstar.entity.Category;
+import vn.iotstar.entity.User;
 import vn.iotstar.entity.Video;
 
 public class Test {
     public static void main(String[] args) {
-        EntityManager enma = JpaConfig.getEntityManager();
-        EntityTransaction trans = enma.getTransaction();
-        
-        Category cate = new Category();
-        cate.setCategoryname("Iphone");
-        cate.setImages("abc.jpg");
-        cate.setStatus(1);
-        
-        Video video = new Video();
-        video.setVideoId("v01");
-        video.setTitle("test");
-        video.setCategory(cate);
-        
+        System.out.println("===============================================================");
+        System.out.println("🚀 [BƯỚC 1]: KIỂM TRA KẾT NỐI DATABASE VÀ KÍCH HOẠT HIBERNATE DDL");
+        System.out.println("===============================================================");
+
+        EntityManager em = null;
         try {
-            trans.begin();
-            enma.persist(cate);
-            enma.persist(video);
-            trans.commit();
-            System.out.println("Thêm dữ liệu thành công!");
+            em = JpaConfig.getEntityManager();
+            System.out.println("✅ Kết nối cơ sở dữ liệu SQL Server thành công!");
+            System.out.println("✅ Đã kích hoạt Hibernate DDL - các bảng 'users', 'categories', 'videos' đã được cập nhật.");
         } catch (Exception e) {
+            System.err.println("❌ KẾT NỐI THẤT BẠI! Vui lòng kiểm tra lại cấu hình trong persistence.xml");
             e.printStackTrace();
-            trans.rollback();
-            throw e;
+            return;
         } finally {
-            enma.close();
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+
+        System.out.println("\n===============================================================");
+        System.out.println("🎯 [BƯỚC 2]: TỰ ĐỘNG CHÈN TÀI KHOẢN MẪU ĐỂ ĐĂNG NHẬP");
+        System.out.println("===============================================================");
+
+        IUserDao userDao = new UserDao();
+        ICategoryDao categoryDao = new CategoryDao();
+        IVideoDao videoDao = new VideoDao(); // Nếu ông chưa có VideoDao thì dòng này có thể báo lỗi đỏ, cứ comment // nó lại trước nhé
+
+        try {
+            // Chèn tài khoản Admin (Đã xóa tên bạn ông, thay bằng thông tin của ông)
+            if (!userDao.checkExistUsername("admin")) {
+                User admin = new User("truong.nguyen@gmail.com", "admin", "Nguyễn Quang Trường", "123", "avt.png", 1, "0838123456", new Date(System.currentTimeMillis()));
+                userDao.insert(admin);
+                System.out.println("✅ Đã tạo tài khoản: admin / 123 (Role: Admin - 1)");
+            } else {
+                System.out.println("ℹ️ Tài khoản 'admin' đã tồn tại sẵn.");
+            }
+
+            // Chèn tài khoản Manager
+            if (!userDao.checkExistUsername("manager")) {
+                User manager = new User("nguyenvana@gmail.com", "manager", "Nguyễn Văn A", "123", null, 2, "0901234567", new Date(System.currentTimeMillis()));
+                userDao.insert(manager);
+                System.out.println("✅ Đã tạo tài khoản: manager / 123 (Role: Manager - 2)");
+            } else {
+                System.out.println("ℹ️ Tài khoản 'manager' đã tồn tại sẵn.");
+            }
+
+            // Chèn tài khoản User
+            if (!userDao.checkExistUsername("user")) {
+                User user = new User("banhthic@gmail.com", "user", "Bành Thị C", "123", null, 3, "0907654321", new Date(System.currentTimeMillis()));
+                userDao.insert(user);
+                System.out.println("✅ Đã tạo tài khoản: user / 123 (Role: User - 3)");
+            } else {
+                System.out.println("ℹ️ Tài khoản 'user' đã tồn tại sẵn.");
+            }
+
+            System.out.println("\n===============================================================");
+            System.out.println("🎯 [BƯỚC 3]: KIỂM TRA CÁC PHƯƠNG THỨC TẦNG DAO (CATEGORY & VIDEO)");
+            System.out.println("===============================================================");
+
+            // 1. Thêm danh mục nếu chưa có
+            if (categoryDao.count() == 0) {
+                Category cate1 = new Category("Áo Thun Nam", "category/men.jpg", 1);
+                Category cate2 = new Category("Váy Nữ Thời Trang", "category/women.jpg", 1);
+                categoryDao.insert(cate1);
+                categoryDao.insert(cate2);
+                System.out.println("✅ Đã thêm các danh mục mẫu.");
+            }
+
+            // 2. In danh sách người dùng & danh mục
+            System.out.println("\n📋 Danh sách User có thể đăng nhập ngay:");
+            for (User u : userDao.findAll()) {
+                System.out.println("   + Username: " + u.getUsername() + " | Password: " + u.getPassword() + " | Fullname: " + u.getFullname());
+            }
+
+            System.out.println("\n📋 Danh sách Danh mục hiện có (" + categoryDao.count() + " bản ghi):");
+            for (Category c : categoryDao.findAll()) {
+                System.out.println("   + [ID: " + c.getCategoryId() + "] " + c.getCategoryname());
+            }
+
+            System.out.println("\n===============================================================");
+            System.out.println("🎉 HOÀN TẤT! BÂY GIỜ BẠN ĐÃ CÓ THỂ ĐĂNG NHẬP VỚI: admin / 123");
+            System.out.println("===============================================================");
+
+        } catch (Exception e) {
+            System.err.println("❌ Có lỗi xảy ra trong quá trình thực thi kiểm thử DAO:");
+            e.printStackTrace();
+        } finally {
+            JpaConfig.close();
+            System.out.println("🔒 Đã đóng EntityManagerFactory an toàn.");
         }
     }
 }

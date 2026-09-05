@@ -1,51 +1,177 @@
-package vn.iotstar.entity;
+package vn.iotstar.entity; // Đã đổi package
 
 import java.io.Serializable;
-import jakarta.persistence.*;
+import java.sql.Date;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "[User]")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserId")
-    private int userid;
+    @Column(name = "id")
+    private int id;
 
-    @Column(name = "Username", nullable = false, unique = true)
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
 
-    @Column(name = "Password", nullable = false)
-    private String password;
+    @Column(name = "email", length = 255, nullable = false, unique = true)
+    private String email;
 
-    @Column(name = "Fullname", columnDefinition = "nvarchar(100)")
+    @Column(name = "fullname", columnDefinition = "NVARCHAR(255)", nullable = false)
     private String fullname;
 
-    @Column(name = "Phone", length = 15)
+    @Column(name = "password", length = 255, nullable = false)
+    private String password;
+
+    @Column(name = "avatar", columnDefinition = "NVARCHAR(500)")
+    private String avatar;
+
+    @Column(name = "roleid", nullable = false)
+    private int roleid = 3;
+
+    @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "Images", columnDefinition = "nvarchar(500)")
-    private String images;
+    @Column(name = "createdDate")
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
 
-    // Constructors, Getters và Setters
-    public User() {}
+    public User() {
+        super();
+    }
 
-    public int getUserid() { return userid; }
-    public void setUserid(int userid) { this.userid = userid; }
+    public User(int id, String email, String username, String fullname, String password, String avatar, int roleid,
+            String phone, Date createdDate) {
+        super();
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.fullname = fullname;
+        this.password = password;
+        this.avatar = avatar;
+        this.roleid = roleid;
+        this.phone = phone;
+        this.createdDate = createdDate;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public User(String email, String username, String fullname, String password, String avatar, int roleid,
+            String phone, Date createdDate) {
+        super();
+        this.email = email;
+        this.username = username;
+        this.fullname = fullname;
+        this.password = password;
+        this.avatar = avatar;
+        this.roleid = roleid;
+        this.phone = phone;
+        this.createdDate = createdDate;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public int getId() {
+        return id;
+    }
 
-    public String getFullname() { return fullname; }
-    public void setFullname(String fullname) { this.fullname = fullname; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public int getUserId() {
+        return id;
+    }
 
-    public String getImages() { return images; }
-    public void setImages(String images) { this.images = images; }
+    public void setUserId(int userId) {
+        this.id = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    // JSP EL camelCase support (${account.fullName})
+    public String getFullName() {
+        return fullname;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullname = fullName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getRoleid() {
+        return roleid;
+    }
+
+    public void setRoleid(int roleid) {
+        this.roleid = roleid;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", username=" + username + ", fullname=" + fullname
+                + ", password=" + password + ", avatar=" + avatar + ", roleid=" + roleid + ", phone=" + phone
+                + ", createdDate=" + createdDate + "]";
+    }
 }

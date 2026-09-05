@@ -3,13 +3,32 @@ package vn.iotstar.config;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
 
-@PersistenceContext
 public class JpaConfig {
+    private static EntityManagerFactory factory;
+
+    public static synchronized EntityManagerFactory getEntityManagerFactory() {
+        if (factory == null || !factory.isOpen()) {
+            try {
+                // Đã sửa tên persistence-unit cho khớp với persistence.xml của ông
+                factory = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
+            } catch (Exception e) {
+                System.err.println("❌ LỖI KHỞI TẠO ENTITY MANAGER FACTORY: " + e.getMessage());
+                e.printStackTrace();
+                throw e;
+            }
+        }
+        return factory;
+    }
+
     public static EntityManager getEntityManager() {
-        // Tên "jpa-hibernate-mysql" này khớp chuẩn với file persistence.xml lúc nãy
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
-        return factory.createEntityManager();
+        return getEntityManagerFactory().createEntityManager();
+    }
+
+    public static synchronized void close() {
+        if (factory != null && factory.isOpen()) {
+            factory.close();
+            factory = null;
+        }
     }
 }

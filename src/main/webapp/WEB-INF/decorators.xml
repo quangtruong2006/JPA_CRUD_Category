@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<decorators defaultdir="/decorators">
-    <decorator name="none" path="/login">
-        <pattern>/login*</pattern>
-        <pattern>/register*</pattern>
+<decorators defaultdir="/WEB-INF/decorators">
+    <!-- Web User Decorator -->
+    <decorator name="web" page="web.jsp">
+        <pattern>/profile*</pattern>
+        <pattern>/user/*</pattern>
+        <pattern>/home*</pattern>
     </decorator>
 
-    <!-- CHỈ trang trí cho web chung, bỏ qua toàn bộ admin để nhường quyền cho MySiteMeshFilter -->
-    <decorator name="web" path="web.jsp">
-        <pattern>/*</pattern>
-        <exclude>/admin/*</exclude>
-        <exclude>/decorators/*</exclude>
+    <!-- Admin Decorator -->
+    <decorator name="admin" page="admin.jsp">
+        <pattern>/admin*</pattern>
     </decorator>
+
+    <!-- Manager Decorator -->
+    <decorator name="manager" page="manager.jsp">
+        <pattern>/manager*</pattern>
+    </decorator>
+
+    <!-- Exclude Auth & Static Endpoints -->
+    <excludes>
+        <pattern>/login*</pattern>
+        <pattern>/register*</pattern>
+        <pattern>/waiting*</pattern>
+        <pattern>/image*</pattern>
+    </excludes>
 </decorators>
