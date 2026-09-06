@@ -221,5 +221,26 @@
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPT KÍCH HOẠT VALIDATION BOOTSTRAP 5 -->
+    <script>
+        (function () {
+            'use strict'
+            // Lấy tất cả các form có class 'needs-validation'
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Lặp qua từng form và ngăn nó gửi đi nếu có lỗi
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 </body>
 </html>

@@ -1,21 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java"
+         contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Chỉnh Sửa Danh Mục - Admin Dashboard</title>
+
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
     <style>
+
         :root {
             --primary: #0077ff;
             --primary-gradient: linear-gradient(135deg, #0088ff 0%, #0055dd 100%);
@@ -26,10 +49,18 @@
             --transition-speed: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+
         * {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans',
+                         -apple-system,
+                         BlinkMacSystemFont,
+                         'Segoe UI',
+                         Roboto,
+                         sans-serif;
+
             box-sizing: border-box;
         }
+
 
         body {
             background-color: var(--bg-page);
@@ -38,7 +69,11 @@
             color: #1e293b;
         }
 
-        /* TOPBAR */
+
+        /* =========================
+           TOPBAR
+           ========================= */
+
         .top-navbar {
             background: var(--primary-gradient);
             color: #ffffff;
@@ -52,6 +87,8 @@
             top: 0;
             z-index: 1000;
         }
+
+
         .top-navbar .brand-title {
             font-size: 24px;
             font-weight: 800;
@@ -59,6 +96,8 @@
             align-items: center;
             gap: 10px;
         }
+
+
         .btn-logout {
             background: var(--danger-gradient);
             color: #ffffff !important;
@@ -73,18 +112,28 @@
             box-shadow: 0 4px 12px rgba(255, 75, 43, 0.35);
             transition: all var(--transition-speed);
         }
+
+
         .btn-logout:hover {
             transform: translateY(-2px) scale(1.02);
             box-shadow: 0 6px 18px rgba(255, 75, 43, 0.5);
         }
 
-        /* WRAPPER */
+
+        /* =========================
+           WRAPPER
+           ========================= */
+
         .wrapper {
             display: flex;
             min-height: calc(100vh - 65px);
         }
 
-        /* SIDEBAR */
+
+        /* =========================
+           SIDEBAR
+           ========================= */
+
         .sidebar {
             width: 270px;
             background-color: var(--sidebar-bg);
@@ -95,11 +144,15 @@
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.04);
             border-top: 1px solid rgba(255,255,255,0.15);
         }
+
+
         .sidebar-profile {
             text-align: center;
             padding: 28px 15px 22px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
+
+
         .sidebar-profile img {
             width: 92px;
             height: 92px;
@@ -109,9 +162,13 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.15);
             transition: transform var(--transition-speed);
         }
+
+
         .sidebar-profile:hover img {
             transform: scale(1.06);
         }
+
+
         .sidebar-profile .role-tag {
             font-size: 14px;
             color: #e0f2fe;
@@ -123,11 +180,14 @@
             margin-top: 10px;
         }
 
+
         .sidebar-menu {
             list-style: none;
             padding: 10px 0;
             margin: 0;
         }
+
+
         .sidebar-menu li a {
             display: flex;
             align-items: center;
@@ -138,41 +198,58 @@
             font-weight: 600;
             transition: all var(--transition-speed);
         }
+
+
         .sidebar-menu li a:hover {
             background-color: rgba(0, 0, 0, 0.15);
             padding-left: 28px;
         }
+
+
         .sidebar-menu li a.active-category {
             background: #0f172a;
             box-shadow: inset 4px 0 0 var(--primary);
         }
+
+
         .sidebar-menu li a i {
             font-size: 19px;
             margin-right: 12px;
         }
+
+
         .sidebar-submenu {
             list-style: none;
             padding: 5px 0;
             margin: 0;
             background-color: #006dd9;
         }
+
+
         .sidebar-submenu li a {
             padding: 10px 22px 10px 52px;
             font-size: 13.5px;
             color: #e0f2fe;
         }
+
+
         .sidebar-submenu li a:hover {
             background-color: #005bb8;
             color: #ffffff;
             padding-left: 56px;
         }
 
-        /* MAIN CONTENT */
+
+        /* =========================
+           MAIN CONTENT
+           ========================= */
+
         .main-content {
             flex-grow: 1;
             padding: 35px 40px;
             background-color: #ffffff;
         }
+
 
         .form-card {
             max-width: 720px;
@@ -182,6 +259,8 @@
             box-shadow: 0 10px 30px rgba(0, 50, 150, 0.05);
             overflow: hidden;
         }
+
+
         .form-card-header {
             padding: 16px 24px;
             background: #f8fafc;
@@ -193,9 +272,12 @@
             align-items: center;
             gap: 8px;
         }
+
+
         .form-card-body {
             padding: 30px;
         }
+
 
         .form-control {
             border-radius: 8px;
@@ -204,12 +286,18 @@
             font-size: 14.5px;
             transition: all var(--transition-speed);
         }
+
+
         .form-control:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3.5px rgba(0, 119, 255, 0.15);
         }
 
-        /* PREVIEW IMAGE HOVER */
+
+        /* =========================
+           PREVIEW IMAGE
+           ========================= */
+
         .preview-box-container {
             width: 140px;
             height: 105px;
@@ -223,21 +311,38 @@
             margin-bottom: 12px;
             transition: all var(--transition-speed);
         }
+
+
         .preview-box-container:hover {
             border-color: var(--primary);
             box-shadow: 0 6px 20px rgba(0, 119, 255, 0.12);
         }
+
+
         .preview-box {
             width: 100%;
             height: 100%;
             object-fit: contain;
             transition: transform var(--transition-speed);
         }
+
+
         .preview-box-container:hover .preview-box {
             transform: scale(1.1);
         }
 
-        /* NÚT BẤM VỚI HIỆU ỨNG ĐẶC BIỆT HOVER */
+
+        .image-hint {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+
+        /* =========================
+           BUTTONS
+           ========================= */
+
         .btn-custom-edit {
             background: var(--info-gradient);
             color: #ffffff;
@@ -251,11 +356,14 @@
             box-shadow: 0 4px 14px rgba(0, 198, 255, 0.35);
             transition: all var(--transition-speed);
         }
+
+
         .btn-custom-edit:hover {
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 6px 20px rgba(0, 114, 255, 0.5);
             color: #ffffff;
         }
+
 
         .btn-custom-reset {
             background: #64748b;
@@ -269,12 +377,15 @@
             gap: 6px;
             transition: all var(--transition-speed);
         }
+
+
         .btn-custom-reset:hover {
             background: #475569;
             color: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(71, 85, 105, 0.3);
         }
+
 
         .btn-custom-back {
             background: #f1f5f9;
@@ -288,146 +399,801 @@
             gap: 6px;
             transition: all var(--transition-speed);
         }
+
+
         .btn-custom-back:hover {
             background: #e2e8f0;
             color: #0f172a;
             transform: translateY(-2px);
         }
+
+
     </style>
+
 </head>
+
+
 <body>
 
-    <!-- TOP NAVBAR -->
+
+    <!-- =========================
+         TOP NAVBAR
+         ========================= -->
+
     <div class="top-navbar">
+
         <div class="brand-title">
-            <i class="bi bi-grid-1x2-fill"></i> Dashboard
+
+            <i class="bi bi-grid-1x2-fill"></i>
+
+            Dashboard
+
         </div>
+
+
         <div class="d-flex align-items-center gap-3">
-            <span class="text-white">Xin chào <strong>${sessionScope.account != null ? sessionScope.account.fullname : 'Quản trị viên'}</strong></span>
-            <a href="${pageContext.request.contextPath}/logout" class="btn-logout">
-                <i class="bi bi-box-arrow-right"></i> Đăng xuất
+
+            <span class="text-white">
+
+                Xin chào
+
+                <strong>
+                    ${sessionScope.account != null
+                        ? sessionScope.account.fullname
+                        : 'Quản trị viên'}
+                </strong>
+
+            </span>
+
+
+            <a href="${pageContext.request.contextPath}/logout"
+               class="btn-logout">
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                Đăng xuất
+
             </a>
+
         </div>
+
     </div>
+
+
+
+    <!-- =========================
+         WRAPPER
+         ========================= -->
 
     <div class="wrapper">
-        <!-- SIDEBAR -->
+
+
+        <!-- =========================
+             SIDEBAR
+             ========================= -->
+
         <div class="sidebar">
+
+
             <div class="sidebar-profile">
+
                 <c:choose>
+
                     <c:when test="${not empty sessionScope.account.avatar}">
+
                         <c:choose>
+
                             <c:when test="${sessionScope.account.avatar.startsWith('http')}">
-                                <img src="${sessionScope.account.avatar}" alt="Avatar" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${sessionScope.account.fullname}&amp;background=ffffff&amp;color=0088ff&amp;bold=true';">
+
+                                <img src="${sessionScope.account.avatar}"
+                                     alt="Avatar"
+                                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${sessionScope.account.fullname}&background=ffffff&color=0088ff&bold=true';">
+
                             </c:when>
+
+
                             <c:otherwise>
-                                <c:url value="/image?fname=${sessionScope.account.avatar}" var="avtUrl"/>
-                                <img src="${avtUrl}" alt="Avatar" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${sessionScope.account.fullname}&amp;background=ffffff&amp;color=0088ff&amp;bold=true';">
+
+                                <c:url value="/image?fname=${sessionScope.account.avatar}"
+                                       var="avtUrl"/>
+
+                                <img src="${avtUrl}"
+                                     alt="Avatar"
+                                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=${sessionScope.account.fullname}&background=ffffff&color=0088ff&bold=true';">
+
                             </c:otherwise>
+
                         </c:choose>
+
                     </c:when>
+
+
                     <c:otherwise>
-                        <img src="https://ui-avatars.com/api/?name=${sessionScope.account.fullname}&background=ffffff&color=0088ff&bold=true" alt="Avatar">
+
+                        <img src="https://ui-avatars.com/api/?name=${sessionScope.account.fullname}&background=ffffff&color=0088ff&bold=true"
+                             alt="Avatar">
+
                     </c:otherwise>
+
                 </c:choose>
+
+
                 <div class="d-block">
-                    <span class="role-tag"><i class="bi bi-shield-lock-fill me-1"></i>Bạn là Admin</span>
+
+                    <span class="role-tag">
+
+                        <i class="bi bi-shield-lock-fill me-1"></i>
+
+                        Bạn là Admin
+
+                    </span>
+
                 </div>
+
             </div>
+
 
             <ul class="sidebar-menu">
+
                 <li>
+
                     <a href="${pageContext.request.contextPath}/admin/home">
-                        <i class="bi bi-speedometer2"></i> Dashboard
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
                     </a>
+
                 </li>
+
+
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/category/list" class="active-category">
-                        <i class="bi bi-folder2-open"></i> Quản lý Danh mục
+
+                    <a href="${pageContext.request.contextPath}/admin/category/list"
+                       class="active-category">
+
+                        <i class="bi bi-folder2-open"></i>
+
+                        Quản lý Danh mục
+
                     </a>
+
                 </li>
+
+
                 <ul class="sidebar-submenu">
-                    <li><a href="${pageContext.request.contextPath}/admin/category/add"><i class="bi bi-plus-circle me-1"></i> Thêm danh mục mới</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/category/list"><i class="bi bi-list-ul me-1"></i> Danh sách danh mục</a></li>
+
+                    <li>
+
+                        <a href="${pageContext.request.contextPath}/admin/category/add">
+
+                            <i class="bi bi-plus-circle me-1"></i>
+
+                            Thêm danh mục mới
+
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <a href="${pageContext.request.contextPath}/admin/category/list">
+
+                            <i class="bi bi-list-ul me-1"></i>
+
+                            Danh sách danh mục
+
+                        </a>
+
+                    </li>
+
                 </ul>
-                <li><a href="#"><i class="bi bi-display"></i> Quản lý sản phẩm</a></li>
-                <li><a href="#"><i class="bi bi-people-fill"></i> Quản lý tài khoản</a></li>
+
+
+                <li>
+
+                    <a href="#">
+
+                        <i class="bi bi-display"></i>
+
+                        Quản lý sản phẩm
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="#">
+
+                        <i class="bi bi-people-fill"></i>
+
+                        Quản lý tài khoản
+
+                    </a>
+
+                </li>
+
             </ul>
+
         </div>
 
-        <!-- MAIN CONTENT -->
+
+
+        <!-- =========================
+             MAIN CONTENT
+             ========================= -->
+
         <div class="main-content">
+
+
             <div class="form-card">
+
+
                 <div class="form-card-header">
-                    <i class="bi bi-pencil-square text-warning"></i> Chỉnh sửa danh mục
+
+                    <i class="bi bi-pencil-square text-warning"></i>
+
+                    Chỉnh sửa danh mục
+
                 </div>
+
+
                 <div class="form-card-body">
-                    <h3 class="fw-bold mb-4" style="color: #0f172a; font-size: 20px;">Thông tin danh mục:</h3>
 
-                    <form action="${pageContext.request.contextPath}/admin/category/edit" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="${category.id}">
 
-                        <!-- Category Name -->
+                    <h3 class="fw-bold mb-4"
+                        style="color: #0f172a; font-size: 20px;">
+
+                        Thông tin danh mục:
+
+                    </h3>
+
+
+
+                    <!-- =========================
+                         FORM
+                         ========================= -->
+
+                    <form action="${pageContext.request.contextPath}/admin/category/edit"
+                          method="post"
+                          enctype="multipart/form-data"
+                          class="needs-validation"
+                          novalidate>
+
+
+                        <!-- ID DANH MỤC -->
+
+                        <input type="hidden"
+                               name="id"
+                               value="${category.id}">
+
+
+
+                        <!-- =========================
+                             TÊN DANH MỤC
+                             ========================= -->
+
                         <div class="mb-4">
-                            <label class="form-label fw-bold text-dark">Tên danh sách:</label>
-                            <input type="text" name="name" class="form-control" value="${category.name}" required placeholder="Nhập tên danh mục...">
-                        </div>
 
-                        <!-- Image & Live Preview -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-dark d-block">Ảnh đại diện:</label>
-                            <div class="preview-box-container">
-                                <c:choose>
-                                    <c:when test="${not empty category.icon}">
-                                        <c:choose>
-                                            <c:when test="${category.icon.startsWith('http')}">
-                                                <img id="imgPreview" src="${category.icon}" class="preview-box" alt="Current icon">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:url value="/image?fname=${category.icon}" var="imgUrl"/>
-                                                <img id="imgPreview" src="${imgUrl}" class="preview-box" alt="Current icon">
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img id="imgPreview" src="https://placehold.co/150x100?text=No+Image" class="preview-box" alt="No icon">
-                                    </c:otherwise>
-                                </c:choose>
+                            <label class="form-label fw-bold text-dark">
+
+                                Tên danh mục
+
+                                <span class="text-danger">*</span>
+
+                            </label>
+
+
+                            <input type="text"
+                                   name="name"
+                                   id="categoryName"
+                                   class="form-control"
+                                   value="${category.name}"
+                                   required
+                                   minlength="2"
+                                   maxlength="50"
+                                   placeholder="Nhập tên danh mục..."
+                                   autocomplete="off">
+
+
+                            <div class="invalid-feedback">
+
+                                Tên danh mục phải từ 2 đến 50 ký tự
+                                và chỉ chứa chữ cái, số hoặc khoảng trắng.
+
                             </div>
-                            <input type="file" name="icon" id="fileInput" class="form-control" accept="image/*" onchange="previewImage(event)">
-                            <small class="text-muted mt-1 d-block">Chọn ảnh mới nếu muốn thay đổi ảnh hiện tại.</small>
+
                         </div>
 
-                        <!-- Action Buttons -->
-                        <div class="d-flex gap-3 mt-4 pt-2 border-top">
-                            <button type="submit" class="btn-custom-edit">
-                                <i class="bi bi-check2-circle"></i> Edit (Lưu thay đổi)
-                            </button>
-                            <button type="reset" class="btn-custom-reset">
-                                <i class="bi bi-arrow-counterclockwise"></i> Reset
-                            </button>
-                            <a href="${pageContext.request.contextPath}/admin/category/list" class="btn-custom-back">
-                                <i class="bi bi-arrow-left"></i> Trở lại
-                            </a>
+
+
+                        <!-- =========================
+                             ẢNH ĐẠI DIỆN
+                             ========================= -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold text-dark d-block">
+
+                                Ảnh đại diện
+
+                            </label>
+
+
+                            <div class="preview-box-container">
+
+                                <c:choose>
+
+
+                                    <c:when test="${not empty category.icon}">
+
+                                        <c:choose>
+
+
+                                            <c:when test="${category.icon.startsWith('http')}">
+
+                                                <img id="imgPreview"
+                                                     src="${category.icon}"
+                                                     class="preview-box"
+                                                     alt="Current icon">
+
+                                            </c:when>
+
+
+                                            <c:otherwise>
+
+                                                <c:url value="/image?fname=${category.icon}"
+                                                       var="imgUrl"/>
+
+                                                <img id="imgPreview"
+                                                     src="${imgUrl}"
+                                                     class="preview-box"
+                                                     alt="Current icon">
+
+                                            </c:otherwise>
+
+
+                                        </c:choose>
+
+                                    </c:when>
+
+
+                                    <c:otherwise>
+
+                                        <img id="imgPreview"
+                                             src="https://placehold.co/150x100?text=No+Image"
+                                             class="preview-box"
+                                             alt="No icon">
+
+                                    </c:otherwise>
+
+
+                                </c:choose>
+
+                            </div>
+
+
+                            <!-- ẢNH MỚI KHÔNG REQUIRED -->
+
+                            <input type="file"
+                                   name="icon"
+                                   id="fileInput"
+                                   class="form-control"
+                                   accept=".jpg,.jpeg,.png,.webp,.gif,image/jpeg,image/png,image/webp,image/gif">
+
+
+                            <div class="invalid-feedback">
+
+                                Ảnh phải là JPG, JPEG, PNG, WEBP hoặc GIF
+                                và không được vượt quá 5MB.
+
+                            </div>
+
+
+                            <small class="text-muted mt-1 d-block">
+
+                                Chọn ảnh mới nếu muốn thay đổi ảnh hiện tại.
+                                Nếu không chọn, ảnh cũ sẽ được giữ nguyên.
+
+                            </small>
+
+
+                            <div class="image-hint">
+
+                                <i class="bi bi-info-circle me-1"></i>
+
+                                Dung lượng tối đa: 5MB.
+
+                            </div>
+
                         </div>
+
+
+
+                        <!-- =========================
+                             BUTTONS
+                             ========================= -->
+
+                        <div class="d-flex gap-3 mt-4 pt-2 border-top">
+
+
+                            <button type="submit"
+                                    class="btn-custom-edit">
+
+                                <i class="bi bi-check2-circle"></i>
+
+                                Lưu thay đổi
+
+                            </button>
+
+
+                            <button type="reset"
+                                    id="resetButton"
+                                    class="btn-custom-reset">
+
+                                <i class="bi bi-arrow-counterclockwise"></i>
+
+                                Reset
+
+                            </button>
+
+
+                            <a href="${pageContext.request.contextPath}/admin/category/list"
+                               class="btn-custom-back">
+
+                                <i class="bi bi-arrow-left"></i>
+
+                                Trở lại
+
+                            </a>
+
+                        </div>
+
+
                     </form>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- Live Preview Script -->
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
     <script>
-        function previewImage(event) {
-            const input = event.target;
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('imgPreview').src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
+
+        'use strict';
+
+
+        const form =
+            document.querySelector('.needs-validation');
+
+
+        const categoryName =
+            document.getElementById('categoryName');
+
+
+        const fileInput =
+            document.getElementById('fileInput');
+
+
+        const imgPreview =
+            document.getElementById('imgPreview');
+
+
+
+        /*
+         * =========================
+         * TÊN DANH MỤC
+         * =========================
+         */
+
+        if (categoryName) {
+
+            categoryName.addEventListener('input', function () {
+
+                /*
+                 * Không cho khoảng trắng ở đầu
+                 */
+
+                this.value =
+                    this.value.replace(/^\s+/, '');
+
+
+                /*
+                 * Không cho nhiều khoảng trắng liên tiếp
+                 */
+
+                this.value =
+                    this.value.replace(/\s{2,}/g, ' ');
+
+
+                /*
+                 * Chỉ cho chữ, số và khoảng trắng
+                 */
+
+                this.value =
+                    this.value.replace(
+                        /[^A-Za-zÀ-ỹĐđ0-9\s]/g,
+                        ''
+                    );
+
+            });
+
+
+            categoryName.addEventListener('blur', function () {
+
+                this.value =
+                    this.value.trim();
+
+            });
+
         }
+
+
+
+        /*
+         * =========================
+         * VALIDATE ẢNH
+         * =========================
+         */
+
+        function validateImage() {
+
+            /*
+             * Không chọn ảnh mới
+             * => Hợp lệ vì giữ ảnh cũ
+             */
+
+            if (!fileInput ||
+                fileInput.files.length === 0) {
+
+                if (fileInput) {
+
+                    fileInput.setCustomValidity('');
+
+                }
+
+                return true;
+
+            }
+
+
+            const file =
+                fileInput.files[0];
+
+
+            /*
+             * Các định dạng cho phép
+             */
+
+            const allowedTypes = [
+
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+                'image/gif'
+
+            ];
+
+
+            if (!allowedTypes.includes(file.type)) {
+
+                fileInput.setCustomValidity(
+                    'Chỉ hỗ trợ JPG, JPEG, PNG, WEBP hoặc GIF.'
+                );
+
+                return false;
+
+            }
+
+
+            /*
+             * Giới hạn 5MB
+             */
+
+            const maxSize =
+                5 * 1024 * 1024;
+
+
+            if (file.size > maxSize) {
+
+                fileInput.setCustomValidity(
+                    'Dung lượng ảnh không được vượt quá 5MB.'
+                );
+
+                return false;
+
+            }
+
+
+            fileInput.setCustomValidity('');
+
+            return true;
+
+        }
+
+
+
+        /*
+         * =========================
+         * PREVIEW ẢNH MỚI
+         * =========================
+         */
+
+        if (fileInput) {
+
+            fileInput.addEventListener(
+                'change',
+                function () {
+
+
+                    const isValid =
+                        validateImage();
+
+
+                    if (!isValid) {
+
+                        return;
+
+                    }
+
+
+                    if (this.files &&
+                        this.files[0]) {
+
+
+                        const file =
+                            this.files[0];
+
+
+                        const reader =
+                            new FileReader();
+
+
+                        reader.onload =
+                            function (e) {
+
+                                imgPreview.src =
+                                    e.target.result;
+
+                            };
+
+
+                        reader.readAsDataURL(file);
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /*
+         * =========================
+         * SUBMIT
+         * =========================
+         */
+
+        if (form) {
+
+            form.addEventListener(
+                'submit',
+                function (event) {
+
+
+                    const imageValid =
+                        validateImage();
+
+
+                    if (!imageValid) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                    }
+
+
+                    if (!form.checkValidity()) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+
+                        const firstInvalid =
+                            form.querySelector(':invalid');
+
+
+                        if (firstInvalid) {
+
+                            firstInvalid.focus();
+
+                        }
+
+                    }
+
+
+                    form.classList.add(
+                        'was-validated'
+                    );
+
+                },
+                false
+            );
+
+        }
+
+
+
+        /*
+         * =========================
+         * RESET
+         * =========================
+         *
+         * Khi reset:
+         * - Tên quay về giá trị ban đầu
+         * - Ảnh preview quay lại ảnh cũ
+         */
+
+        if (form) {
+
+            form.addEventListener(
+                'reset',
+                function () {
+
+
+                    setTimeout(function () {
+
+
+                        form.classList.remove(
+                            'was-validated'
+                        );
+
+
+                        if (fileInput) {
+
+                            fileInput.setCustomValidity('');
+
+                        }
+
+
+                        /*
+                         * Khôi phục ảnh cũ
+                         */
+
+                        if (imgPreview) {
+
+                            imgPreview.src =
+                                '${not empty category.icon
+                                    ? (category.icon.startsWith("http")
+                                        ? category.icon
+                                        : pageContext.request.contextPath.concat("/image?fname=").concat(category.icon))
+                                    : "https://placehold.co/150x100?text=No+Image"}';
+
+                        }
+
+                    }, 10);
+
+                }
+            );
+
+        }
+
     </script>
+
+
 </body>
+
 </html>

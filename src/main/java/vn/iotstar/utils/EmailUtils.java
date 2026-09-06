@@ -8,7 +8,7 @@ import jakarta.mail.internet.MimeMessage;
 public class EmailUtils {
     
     private static final String FROM_EMAIL = "quangtruongn57@gmail.com"; 
-    private static final String PASSWORD = "sprw mhmj gxuh pqat";      
+    private static final String PASSWORD = "qshi txrk frjr ichb";      
 
     public static boolean sendEmail(String toEmail, String subject, String messageText) {
         Properties props = new Properties();
